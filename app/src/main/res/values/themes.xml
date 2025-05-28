@@ -13,13 +13,22 @@
     </style>
 
     <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="itemTextAppearanceActive">@style/TextAppearance.BottomNavigationView</item>
-        <item name="itemTextAppearanceInactive">@style/TextAppearance.BottomNavigationView</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.App.BottomNavigationView.Active</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.App.BottomNavigationView.Inactive</item>
         <item name="itemPaddingTop">8dp</item>
         <item name="itemPaddingBottom">8dp</item>
+        <item name="elevation">16dp</item>
     </style>
 
-    <style name="TextAppearance.BottomNavigationView" parent="TextAppearance.MaterialComponents.Caption">
+    <style name="TextAppearance.App.BottomNavigationView.Active" parent="TextAppearance.MaterialComponents.Caption">
         <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.App.BottomNavigationView.Inactive" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
     </style>
 </resources>

@@ -8,9 +8,9 @@
     <color name="primary_blue">#1E3A8A</color>
 
     <!-- Primary Colors -->
-    <color name="primary_light_blue">#3B82F6</color>
-    <color name="background_gradient_start">#1E40AF</color>
-    <color name="background_gradient_end">#1E3A8A</color>
+    <color name="primary">#3B82F6</color>
+    <color name="surface">#1E293B</color>
+    <color name="text_secondary">#94A3B8</color>
 
     <!-- Bottom Navigation Colors -->
     <color name="bottom_nav_selected">#FFFFFF</color>
@@ -21,5 +21,15 @@
     <color name="card_semi_transparent">#40FFFFFF</color>
     <color name="white_transparent">#80FFFFFF</color>
 
+    <!-- New Color Scheme -->
+    <color name="primary_light_blue">#3B82F6</color>
+    <color name="background_gradient_start">#1E40AF</color>
+    <color name="background_gradient_end">#1E3A8A</color>
+    <color name="primary_dark">#1E40AF</color>
+    <color name="accent">#60A5FA</color>
+    <color name="background">#0F172A</color>
+    <color name="card_background">#1E293B</color>
+
+    <color name="text_primary">#FFFFFF</color>
 
 </resources>

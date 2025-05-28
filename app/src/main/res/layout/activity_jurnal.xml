@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/ic_journal"
+                app:tint="@color/primary"
+                android:contentDescription="Journal icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hi! Dayat 👋"
+                android:textColor="@color/text_primary"
+                android:textSize="28sp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Let's explore your jurnal!"
+                android:textColor="@color/text_primary"
+                android:alpha="0.7"
+                android:textSize="16sp"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/welcome_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/surface">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Welcome to Jurnal Tobatku"
+                        android:textColor="@color/text_primary"
+                        android:textSize="22sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ini adalah ruang pribadi untuk menuliskan refleksi harian, dzikullah dengan menuliskan apa yang kamu rasakan hari ini."
+                        android:textColor="@color/text_primary"
+                        android:alpha="0.7"
+                        android:textSize="15sp"
+                        android:layout_marginTop="12dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_create_journal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Create Jurnal"
+                        android:textSize="16sp"
+                        android:paddingHorizontal="24dp"
+                        android:layout_marginTop="20dp"
+                        app:cornerRadius="28dp"
+                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/journal_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="88dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="List of journal entries"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="New Journal"
+        android:textSize="14sp"
+        app:icon="@drawable/ic_add"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="88dp"
+        app:elevation="6dp"
+        android:contentDescription="Add new journal"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:elevation="12dp"
+        android:background="@drawable/bottom_nav_bg"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:itemTextColor="@color/bottom_nav_color"
+        app:itemIconSize="24dp"
+        app:itemPadding="8dp"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_navigation_menu"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
