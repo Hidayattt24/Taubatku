@@ -6,4 +6,20 @@
     </style>
 
     <style name="Theme.Taubatku" parent="Base.Theme.Taubatku" />
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- ...existing code... -->
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemTextAppearanceActive">@style/TextAppearance.BottomNavigationView</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.BottomNavigationView</item>
+        <item name="itemPaddingTop">8dp</item>
+        <item name="itemPaddingBottom">8dp</item>
+    </style>
+
+    <style name="TextAppearance.BottomNavigationView" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>
