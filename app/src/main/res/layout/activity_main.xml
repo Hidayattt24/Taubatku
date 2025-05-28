@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".MainActivity">
+
+    <!-- Salam -->
+    <TextView
+        android:id="@+id/greetingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Assalamua’laikum, Dayat"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Prayer Name -->
+    <TextView
+        android:id="@+id/prayerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dhuhr"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/greetingText"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="24dp"/>
+
+    <!-- Prayer Time -->
+    <TextView
+        android:id="@+id/prayerTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12.43"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="32sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/prayerName"
+        app:layout_constraintStart_toEndOf="@id/prayerName"
+        android:layout_marginStart="8dp"/>
+
+    <!-- Next Prayer Countdown -->
+    <TextView
+        android:id="@+id/nextPrayerCountdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next Prayer in 7:34:04"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/prayerName"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="24dp"/>
+
+    <!-- Hadith Card 1 -->
+    <ImageView
+        android:id="@+id/hadithCard1"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/kaaba_sample"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/nextPrayerCountdown"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="24dp"/>
+
+    <!-- Hadith Card 2 -->
+    <ImageView
+        android:id="@+id/hadithCard2"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/mosque_sample"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toTopOf="@id/hadithCard1"
+        app:layout_constraintStart_toEndOf="@id/hadithCard1"/>
+
+    <!-- Location & Tomorrow -->
+    <TextView
+        android:id="@+id/locationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tomorrow Banda Aceh"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/hadithCard1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="24dp"/>
+
+    <!-- Prayer Time Grid Layout -->
+    <GridLayout
+        android:id="@+id/prayerGrid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:alignmentMode="alignMargins"
+        android:columnCount="3"
+        android:rowCount="2"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/locationText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp">
+
+        <!-- Example Prayer Card -->
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:background="@drawable/prayer_card"
+            android:gravity="center"
+            android:text="Fajr\n05.17"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:padding="8dp"/>
+
+        <!-- Repeat for other times -->
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:background="@drawable/prayer_card"
+            android:gravity="center"
+            android:text="Sunrise\n06.33"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:padding="8dp"/>
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:background="@drawable/prayer_card_active"
+            android:gravity="center"
+            android:text="Dhuhr\n12.43"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:padding="8dp"/>
+
+        <!-- Add Asr, Maghrib, Isha similarly -->
+    </GridLayout>
+
+    <!-- Monthly Calendar Button -->
+    <Button
+        android:id="@+id/monthlyCalendar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Monthly Calendar"
+        android:background="@drawable/black_button"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/prayerGrid"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"/>
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/black"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@color/nav_icon_color"
+        app:itemTextColor="@color/nav_icon_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

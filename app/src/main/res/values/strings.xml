@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Sholat App</string>
+    <string name="starting_to_live_with_the_sholat">Starting To Live With The Sholat.</string>
+    <string name="sholat_quote">"Sholat adalah tiang agama. Barang siapa mendirikannya, maka ia telah menegakkan agama."(HR. Thabrani)</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="mosque_background">Mosque background</string>
+</resources>
