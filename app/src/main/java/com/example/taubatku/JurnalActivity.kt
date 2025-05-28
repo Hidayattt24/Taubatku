@@ -11,28 +11,36 @@ class JurnalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jurnal)
 
+        setupBottomNavigation()
+        setupFab()
+    }
+
+    private fun setupBottomNavigation() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        val fabAdd = findViewById<ExtendedFloatingActionButton>(R.id.fab_add)
-        
-        bottomNav.selectedItemId = R.id.nav_journal
+        bottomNav.selectedItemId = R.id.nav_journal // Menandai Journal sebagai halaman aktif
 
         bottomNav.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_prayer -> {
                     startActivity(Intent(this, MainActivity::class.java))
+                    overridePendingTransition(0, 0)
                     finish()
                     false
                 }
-                R.id.nav_journal -> true
+                R.id.nav_journal -> true // Tetap di halaman Journal
                 R.id.nav_settings -> {
                     startActivity(Intent(this, SettingsActivity::class.java))
+                    overridePendingTransition(0, 0)
                     finish()
                     false
                 }
                 else -> false
             }
         }
+    }
 
+    private fun setupFab() {
+        val fabAdd = findViewById<ExtendedFloatingActionButton>(R.id.fab_add)
         fabAdd.setOnClickListener {
             startActivity(Intent(this, JournalEditorActivity::class.java))
         }

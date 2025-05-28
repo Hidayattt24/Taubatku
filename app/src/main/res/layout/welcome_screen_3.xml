@@ -104,12 +104,12 @@
                 android:layout_width="8dp"
                 android:layout_height="8dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/indicator_active" />
+                android:background="@drawable/indicator_inactive" />
 
             <View
                 android:layout_width="8dp"
                 android:layout_height="8dp"
-                android:background="@drawable/indicator_inactive" />
+                android:background="@drawable/indicator_active" />
         </LinearLayout>
 
         <!-- Navigation Buttons Row -->

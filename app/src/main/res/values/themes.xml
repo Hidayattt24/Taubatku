@@ -8,10 +8,10 @@
     <style name="Theme.Taubatku" parent="Base.Theme.Taubatku" />
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- ...existing code... -->
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
     </style>
 
+    <!-- Bottom Navigation Styles -->
     <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
         <item name="itemTextAppearanceActive">@style/TextAppearance.App.BottomNavigationView.Active</item>
@@ -19,6 +19,12 @@
         <item name="itemPaddingTop">8dp</item>
         <item name="itemPaddingBottom">8dp</item>
         <item name="elevation">16dp</item>
+    </style>
+
+    <!-- Add the missing ThemeOverlay style -->
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorSurface">@color/surface</item>
     </style>
 
     <style name="TextAppearance.App.BottomNavigationView.Active" parent="TextAppearance.MaterialComponents.Caption">

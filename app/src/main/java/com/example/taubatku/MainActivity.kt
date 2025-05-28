@@ -10,19 +10,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        setupBottomNavigation()
+    }
+
+    private fun setupBottomNavigation() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNav.selectedItemId = R.id.nav_prayer // Set Prayer sebagai item yang aktif
+        bottomNav.selectedItemId = R.id.nav_prayer // Menandai Prayer sebagai halaman aktif
 
         bottomNav.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_prayer -> true
+                R.id.nav_prayer -> true // Tetap di halaman Prayer
                 R.id.nav_journal -> {
                     startActivity(Intent(this, JurnalActivity::class.java))
+                    overridePendingTransition(0, 0)
                     finish()
                     false
                 }
                 R.id.nav_settings -> {
                     startActivity(Intent(this, SettingsActivity::class.java))
+                    overridePendingTransition(0, 0)
                     finish()
                     false
                 }
