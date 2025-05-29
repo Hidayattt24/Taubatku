@@ -54,30 +54,54 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="24dp"
+                    android:gravity="center_horizontal">
 
-                    <!-- Profile Image -->
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/profile_image"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/default_profile"
-                        app:shapeAppearanceOverlay="@style/CircleImageView"/>
+                    <FrameLayout
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:background="@drawable/circle_background">
 
-                    <!-- Change Photo Button - updated to regular button -->
+                        <!-- Profile Image -->
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/profile_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_mosque"
+                            android:padding="2dp"
+                            app:strokeColor="@color/primary"
+                            app:strokeWidth="2dp"
+                            app:shapeAppearanceOverlay="@style/CircleImageView"/>
+
+                        <!-- Camera Icon Overlay -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/circle_ripple"/>
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_camera"
+                            android:alpha="0.9"
+                            app:tint="@color/primary"/>
+                    </FrameLayout>
+
+                    <!-- Change Photo Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_change_photo"
                         android:layout_width="wrap_content"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
                         android:text="Change Photo"
-                        android:textColor="@color/white"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="12dp"
-                        app:cornerRadius="24dp"
+                        android:textColor="@color/primary"
+                        android:layout_marginTop="16dp"
+                        app:cornerRadius="20dp"
                         android:paddingHorizontal="24dp"
-                        app:backgroundTint="@color/primary"/>
+                        app:strokeColor="@color/primary"
+                        app:strokeWidth="1dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -94,14 +118,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="24dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Account Settings"
                         android:textColor="@color/text_primary"
-                        android:textSize="18sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="16dp"/>
 
@@ -110,60 +134,72 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
+                        android:hint="Username"
                         app:boxBackgroundColor="@android:color/transparent"
                         app:boxStrokeColor="@color/primary"
-                        android:hint="Username">
+                        app:hintTextColor="@color/primary"
+                        android:textColorHint="@color/text_secondary"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_username"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/text_primary"/>
+                            android:textColor="@color/text_primary"
+                            android:textColorHint="@color/text_secondary"
+                            android:backgroundTint="@android:color/transparent"
+                            android:inputType="text"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Password -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="24dp"
+                        android:hint="New Password"
                         app:boxBackgroundColor="@android:color/transparent"
                         app:boxStrokeColor="@color/primary"
+                        app:hintTextColor="@color/primary"
+                        android:textColorHint="@color/text_secondary"
                         app:passwordToggleEnabled="true"
-                        android:hint="Password">
+                        app:passwordToggleTint="@color/primary"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textPassword"
-                            android:textColor="@color/text_primary"/>
+                            android:textColor="@color/text_primary"
+                            android:textColorHint="@color/text_secondary"
+                            android:backgroundTint="@android:color/transparent"
+                            android:inputType="textPassword"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Save Changes Button - updated style -->
+                    <!-- Save Changes Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_save_changes"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:text="Save Changes"
-                        android:textColor="@color/white"
-                        app:cornerRadius="28dp"
+                        android:textColor="@android:color/white"
                         android:textSize="16sp"
+                        app:cornerRadius="28dp"
                         app:backgroundTint="@color/primary"/>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Logout Button - updated style -->
+            <!-- Logout Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_logout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:text="Logout"
-                android:textColor="@color/white"
+                android:textColor="@android:color/white"
                 android:textSize="16sp"
                 app:cornerRadius="28dp"
                 app:backgroundTint="#FF5252"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="8dp"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

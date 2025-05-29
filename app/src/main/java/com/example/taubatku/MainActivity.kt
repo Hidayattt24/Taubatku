@@ -26,9 +26,11 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
     private lateinit var welcomeText: TextView
     private lateinit var currentPrayerName: TextView
     private lateinit var currentPrayerTime: TextView
@@ -69,43 +71,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        try {
-            // Initialize Firebase Auth
-            auth = Firebase.auth
+        // Initialize Firebase
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
-            // Hide action bar
-            supportActionBar?.hide()
-
-            // Get current user
-            val user = auth.currentUser
-            if (user == null) {
-                // Not signed in, launch the Login activity
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-                return
-            }
-
-            // Initialize views
-            initializeViews()
-
-            // Update welcome message with username
-            val username = user.displayName ?: "User"
-            welcomeText.text = "Assalamu'alaikum, $username"
-
-            // Fetch prayer times
-            fetchPrayerTimes()
-
-            setupBottomNavigation()
-            setupObservers()
-            startUpdates()
-        } catch (e: Exception) {
-            Log.e(TAG, "Error in onCreate", e)
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
-    }
-
-    private fun initializeViews() {
+        // Initialize views
         welcomeText = findViewById(R.id.welcomeText)
         currentPrayerName = findViewById(R.id.currentPrayerName)
         currentPrayerTime = findViewById(R.id.currentPrayerTime)
@@ -116,10 +86,25 @@ class MainActivity : AppCompatActivity() {
         asrTime = findViewById(R.id.asrTime)
         maghribTime = findViewById(R.id.maghribTime)
         ishaTime = findViewById(R.id.ishaTime)
+
+        // Load user data
+        loadUserData()
+        setupBottomNavigation()
+        setupObservers()
+        startUpdates()
     }
 
-    private fun fetchPrayerTimes() {
-        viewModel.fetchPrayerTimes()
+    private fun loadUserData() {
+        val userId = auth.currentUser?.uid ?: return
+        
+        db.collection("users").document(userId)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val username = document.getString("username") ?: "User"
+                    welcomeText.text = "Assalamu'alaikum, $username"
+                }
+            }
     }
 
     private fun setupObservers() {
@@ -207,6 +192,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        loadUserData() // Reload user data when returning to this screen
         // Check if user is still authenticated
         if (auth.currentUser == null) {
             startActivity(Intent(this, LoginActivity::class.java))
@@ -214,6 +200,10 @@ class MainActivity : AppCompatActivity() {
         }
         // Refresh prayer times
         fetchPrayerTimes()
+    }
+
+    private fun fetchPrayerTimes() {
+        viewModel.fetchPrayerTimes()
     }
 
     override fun onDestroy() {
