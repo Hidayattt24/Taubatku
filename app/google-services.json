@@ -12,7 +12,20 @@
           "package_name": "com.example.taubatku"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "611038963099-ghbt417ocu6i505tbjionqdt4lr2i2qs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.taubatku",
+            "certificate_hash": "a4b5c544a5dd6154db0c5912d67c2a20052b208d"
+          }
+        },
+        {
+          "client_id": "611038963099-ghsan8j72611gkiu8eo0tni8p5qv09ms.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDFe8ySb3bE8ijKturS3FcdH0w0m9eJ4Kk"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "611038963099-ghsan8j72611gkiu8eo0tni8p5qv09ms.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
