@@ -41,9 +41,10 @@
                     android:layout_marginStart="12dp">
 
                     <TextView
+                        android:id="@+id/welcomeText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Assalamua'laikum, Dayat"
+                        android:text="Assalamu'alaikum"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
                         android:alpha="0.8" />
@@ -60,6 +61,7 @@
                 android:layout_marginBottom="24dp">
 
                 <TextView
+                    android:id="@+id/currentPrayerName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dhuhr"
@@ -68,15 +70,17 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/currentPrayerTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12.43"
+                    android:text="12:43"
                     android:textColor="@android:color/white"
                     android:textSize="48sp"
                     android:textStyle="bold"
                     android:alpha="0.7" />
 
                 <TextView
+                    android:id="@+id/nextPrayerText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Next Prayer in 7:34:04"
@@ -229,9 +233,10 @@
                             android:layout_marginTop="4dp" />
 
                         <TextView
+                            android:id="@+id/fajrTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="05.17"
+                            android:text="05:17"
                             android:textColor="@android:color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -271,9 +276,10 @@
                             android:layout_marginTop="4dp" />
 
                         <TextView
+                            android:id="@+id/sunriseTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="06.33"
+                            android:text="06:33"
                             android:textColor="@android:color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -313,9 +319,10 @@
                             android:layout_marginTop="4dp" />
 
                         <TextView
+                            android:id="@+id/dhuhrTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="12.43"
+                            android:text="12:43"
                             android:textColor="@color/primary_blue"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -355,9 +362,10 @@
                             android:layout_marginTop="4dp" />
 
                         <TextView
+                            android:id="@+id/asrTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="15.48"
+                            android:text="15:48"
                             android:textColor="@android:color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -397,9 +405,10 @@
                             android:layout_marginTop="4dp" />
 
                         <TextView
+                            android:id="@+id/maghribTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="18.49"
+                            android:text="18:49"
                             android:textColor="@android:color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -439,9 +448,10 @@
                             android:layout_marginTop="4dp" />
 
                         <TextView
+                            android:id="@+id/ishaTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="19.58"
+                            android:text="19:58"
                             android:textColor="@android:color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -46,7 +48,33 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:launchMode="singleTop"
+            android:clearTaskOnLaunch="true" />
+
+        <activity
+            android:name=".SignupSuccessActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme"
+            android:noHistory="true" />
+
+        <activity
+            android:name=".JurnalActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".JournalEditorActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

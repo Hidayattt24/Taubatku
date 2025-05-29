@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "611038963099",
+    "project_id": "tobatku-915c7",
+    "storage_bucket": "tobatku-915c7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611038963099:android:c8ea83460c91f52966ed3e",
+        "android_client_info": {
+          "package_name": "com.example.taubatku"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFe8ySb3bE8ijKturS3FcdH0w0m9eJ4Kk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
