@@ -1,6 +1,9 @@
 package com.example.taubatku
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,6 +13,10 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -41,6 +48,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var asrTime: TextView
     private lateinit var maghribTime: TextView
     private lateinit var ishaTime: TextView
+    private lateinit var locationText: TextView
     private val TAG = "MainActivity"
     private val viewModel: PrayerTimesViewModel by viewModels()
     private val handler = Handler(Looper.getMainLooper())
@@ -50,6 +58,8 @@ class MainActivity : AppCompatActivity() {
             handler.postDelayed(this, 1000) // Update every second
         }
     }
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val LOCATION_PERMISSION_REQUEST_CODE = 1
 
     private val prayerTimeService: PrayerTimeService by lazy {
         val logging = HttpLoggingInterceptor().apply {
@@ -86,12 +96,41 @@ class MainActivity : AppCompatActivity() {
         asrTime = findViewById(R.id.asrTime)
         maghribTime = findViewById(R.id.maghribTime)
         ishaTime = findViewById(R.id.ishaTime)
+        locationText = findViewById(R.id.locationText)
+
+        // Set up dates
+        setupDates()
+
+        // Set up hadith card click
+        findViewById<CardView>(R.id.hadithCard).setOnClickListener {
+            startActivity(Intent(this, HadithDetailActivity::class.java))
+        }
+
+        // Initialize location client
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         // Load user data
         loadUserData()
         setupBottomNavigation()
         setupObservers()
         startUpdates()
+
+        // Check and request location permissions
+        checkLocationPermission()
+    }
+
+    private fun setupDates() {
+        val dateFormat = SimpleDateFormat("dd/MM/yy", Locale.getDefault())
+        val calendar = Calendar.getInstance()
+        
+        // Today's date
+        val today = dateFormat.format(calendar.time)
+        findViewById<TextView>(R.id.todayDateText).text = today
+
+        // Tomorrow's date
+        calendar.add(Calendar.DAY_OF_YEAR, 1)
+        val tomorrow = dateFormat.format(calendar.time)
+        findViewById<TextView>(R.id.tomorrowDateText).text = tomorrow
     }
 
     private fun loadUserData() {
@@ -209,5 +248,65 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         handler.removeCallbacks(updateRunnable)
+    }
+
+    private fun checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Request permission
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+        } else {
+            // Permission already granted
+            getCurrentLocation()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            LOCATION_PERMISSION_REQUEST_CODE -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    getCurrentLocation()
+                }
+            }
+        }
+    }
+
+    private fun getCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                location?.let {
+                    // Use Geocoder to get city name
+                    val geocoder = Geocoder(this, Locale.getDefault())
+                    try {
+                        val addresses = geocoder.getFromLocation(it.latitude, it.longitude, 1)
+                        addresses?.let { addressList ->
+                            if (addressList.isNotEmpty()) {
+                                val cityName = addressList[0].subAdminArea ?: addressList[0].locality
+                                // Update TextView with current location
+                                locationText.text = "Today $cityName"
+                            }
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+        }
     }
 }

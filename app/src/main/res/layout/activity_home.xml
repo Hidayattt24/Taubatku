@@ -122,23 +122,27 @@
                             android:alpha="0.8" />
 
                         <TextView
+                            android:id="@+id/todayDateText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="03/04/25"
+                            android:text="Today"
                             android:textColor="@android:color/white"
-                            android:textSize="12sp"
-                            />
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/hadithCard"
                     android:layout_width="0dp"
                     android:layout_height="120dp"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
                     app:cardCornerRadius="12dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
                     app:cardElevation="4dp">
 
                     <LinearLayout
@@ -157,12 +161,12 @@
                             android:alpha="0.8" />
 
                         <TextView
+                            android:id="@+id/tomorrowDateText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="03/04/25"
+                            android:text="Tomorrow"
                             android:textColor="@android:color/white"
-                            android:textSize="12sp"
-                             />
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 
@@ -179,18 +183,13 @@
                 android:layout_marginBottom="16dp">
 
                 <TextView
+                    android:id="@+id/locationText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tomorrow Banda Aceh"
+                    android:text="Today Banda Aceh"
                     android:textColor="@android:color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="8dp"
-                    android:src="@drawable/ic_verified" />
 
             </LinearLayout>
 

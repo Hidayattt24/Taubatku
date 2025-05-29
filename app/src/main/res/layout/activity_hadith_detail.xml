@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/black">
+
+    <!-- Header with Back Button -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:padding="16dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_back"
+            android:padding="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_centerVertical="true"
+            app:tint="@android:color/white"
+            android:contentDescription="Back to home"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </RelativeLayout>
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Hadith Image Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="16dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/mosque_sample"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hadith of\nthe Day"
+                    android:textColor="@android:color/white"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:layout_margin="16dp"
+                    android:fontFamily="serif"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Arabic Text -->
+            <TextView
+                android:id="@+id/arabicText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ما من نبي بعثه الله في أمة قبلي إلا كان له من امته حواريون وأصحاب يأخذون بسنته ويقتدون بأمره، ثم إنها تخلف من بعدهم خلوف يقولون ما لا يفعلون ويفعلون ما لا يؤمرون، فمن جاهدهم بيده فهو مؤمن، ومن جاهدهم بلسانه فهو مؤمن، ومن جاهدهم بقلبه فهو مؤمن، وليس وراء ذلك من الإيمان حبة خردل."
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textAlignment="textStart"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="serif"/>
+
+            <!-- Indonesian Translation -->
+            <TextView
+                android:id="@+id/translationText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tidaklah seorang Nabi diutus sebelumku melainkan ia memiliki pengikut dari umatnya, para sahabat yang mengikuti sunnahnya dan menaati perintahnya. Kemudian datang setelah mereka generasi yang berkata tanpa beramal dan beramal tanpa diperintah. Maka barang siapa yang memerangi mereka dengan tangannya, maka ia adalah seorang mukmin. Barang siapa yang memerangi mereka dengan lisannya, maka ia adalah seorang mukmin. Dan barang siapa yang memerangi mereka dengan hatinya, maka ia adalah seorang mukmin. Dan setelah itu tidak ada lagi keimanan meskipun sebesar biji sawi."
+                android:textColor="#CCCCCC"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout> 

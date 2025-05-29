@@ -78,6 +78,11 @@
             android:exported="false"
             android:theme="@style/AppTheme"
             android:launchMode="singleTop" />
+
+        <activity
+            android:name=".HadithDetailActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
