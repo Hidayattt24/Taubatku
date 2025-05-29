@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
+    android:layout_marginHorizontal="4dp"
     android:layout_marginVertical="8dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp"
@@ -33,15 +33,41 @@
             android:textColor="@color/text_secondary"
             android:layout_marginTop="4dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_open"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Open"
-            android:textSize="14sp"
-            android:layout_marginTop="12dp"
-            app:cornerRadius="20dp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_open"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Open"
+                android:textSize="14sp"
+                app:cornerRadius="20dp"
+                android:textColor="@color/primary"
+                app:backgroundTint="@android:color/white"
+                app:strokeColor="@color/primary"
+                app:strokeWidth="1dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Delete"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                app:cornerRadius="20dp"
+                app:backgroundTint="@android:color/holo_red_light"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+        </LinearLayout>
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
