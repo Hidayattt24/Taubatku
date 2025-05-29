@@ -46,7 +46,8 @@
                         android:layout_height="wrap_content"
                         android:text="Assalamu'alaikum"
                         android:textColor="@android:color/white"
-                        android:textSize="14sp"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
                         android:alpha="0.8" />
 
                 </LinearLayout>
@@ -203,6 +204,7 @@
 
                 <!-- Fajr -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/fajrCard"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_columnWeight="1"
@@ -246,6 +248,7 @@
 
                 <!-- Sunrise -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/sunriseCard"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_columnWeight="1"
@@ -287,14 +290,15 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <!-- Dhuhr - Highlighted -->
+                <!-- Dhuhr -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/dhuhrCard"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_columnWeight="1"
                     android:layout_margin="4dp"
                     app:cardCornerRadius="12dp"
-                    app:cardBackgroundColor="@android:color/white">
+                    app:cardBackgroundColor="#40FFFFFF">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -306,14 +310,13 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_sun"
-                       />
+                            android:src="@drawable/ic_sun" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Dhuhr"
-                            android:textColor="@color/primary_blue"
+                            android:textColor="@android:color/white"
                             android:textSize="12sp"
                             android:layout_marginTop="4dp" />
 
@@ -322,7 +325,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="12:43"
-                            android:textColor="@color/primary_blue"
+                            android:textColor="@android:color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
@@ -332,6 +335,7 @@
 
                 <!-- Asr -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/asrCard"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_columnWeight="1"
@@ -375,6 +379,7 @@
 
                 <!-- Maghrib -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/maghribCard"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_columnWeight="1"
@@ -418,6 +423,7 @@
 
                 <!-- Isha -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/ishaCard"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_columnWeight="1"
@@ -462,13 +468,18 @@
             </GridLayout>
 
             <!-- Monthly Calendar Button -->
-            <Button
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/monthlyCalendarButton"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="56dp"
                 android:text="Monthly Calendar"
-                android:textColor="@android:color/white"
-                android:background="@drawable/btn_calendar_bg"
-                android:layout_marginBottom="16dp" />
+                android:textColor="@color/primary_blue"
+                android:textStyle="bold"
+                app:cornerRadius="12dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="16dp"
+                app:backgroundTint="@android:color/white"
+                app:elevation="2dp"/>
 
         </LinearLayout>
 

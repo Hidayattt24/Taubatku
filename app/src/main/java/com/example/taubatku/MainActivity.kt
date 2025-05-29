@@ -34,6 +34,9 @@ import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 import com.google.firebase.firestore.FirebaseFirestore
+import android.widget.LinearLayout
+import android.widget.ImageView
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -98,6 +101,11 @@ class MainActivity : AppCompatActivity() {
         ishaTime = findViewById(R.id.ishaTime)
         locationText = findViewById(R.id.locationText)
 
+        // Set up calendar button
+        findViewById<MaterialButton>(R.id.monthlyCalendarButton).setOnClickListener {
+            startActivity(Intent(this, MonthlyCalendarActivity::class.java))
+        }
+
         // Set up dates
         setupDates()
 
@@ -150,20 +158,7 @@ class MainActivity : AppCompatActivity() {
         // Update current prayer name and time
         viewModel.upcomingPrayer.observe(this) { prayer ->
             currentPrayerName.text = prayer
-            
-            // Reset all cards to default background
-            listOf("Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha").forEach { prayerName ->
-                val cardId = resources.getIdentifier("${prayerName.lowercase()}Card", "id", packageName)
-                findViewById<CardView>(cardId)?.setCardBackgroundColor(
-                    getColor(R.color.prayer_card_default)
-                )
-            }
-
-            // Highlight upcoming prayer card
-            val cardId = resources.getIdentifier("${prayer.lowercase()}Card", "id", packageName)
-            findViewById<CardView>(cardId)?.setCardBackgroundColor(
-                getColor(R.color.white)
-            )
+            updatePrayerHighlight(prayer)
         }
 
         viewModel.upcomingPrayerTime.observe(this) { time ->
@@ -182,6 +177,45 @@ class MainActivity : AppCompatActivity() {
             asrTime.text = timings.Asr
             maghribTime.text = timings.Maghrib
             ishaTime.text = timings.Isha
+        }
+    }
+
+    private fun updatePrayerHighlight(currentPrayer: String) {
+        // Reset all cards to default background
+        val cards = mapOf(
+            "Fajr" to findViewById<CardView>(R.id.fajrCard),
+            "Sunrise" to findViewById<CardView>(R.id.sunriseCard),
+            "Dhuhr" to findViewById<CardView>(R.id.dhuhrCard),
+            "Asr" to findViewById<CardView>(R.id.asrCard),
+            "Maghrib" to findViewById<CardView>(R.id.maghribCard),
+            "Isha" to findViewById<CardView>(R.id.ishaCard)
+        )
+
+        // Reset all cards to default background
+        cards.values.forEach { card ->
+            card.setCardBackgroundColor(getColor(R.color.card_background_transparent))
+            // Reset text colors for all children TextViews
+            (card.getChildAt(0) as? LinearLayout)?.let { layout ->
+                for (i in 0 until layout.childCount) {
+                    (layout.getChildAt(i) as? TextView)?.setTextColor(getColor(android.R.color.white))
+                }
+            }
+        }
+
+        // Highlight current prayer card
+        cards[currentPrayer]?.let { card ->
+            card.setCardBackgroundColor(getColor(android.R.color.white))
+            // Update text colors for the highlighted card
+            (card.getChildAt(0) as? LinearLayout)?.let { layout ->
+                for (i in 0 until layout.childCount) {
+                    (layout.getChildAt(i) as? TextView)?.setTextColor(getColor(R.color.primary_blue))
+                }
+                // Update icon tint
+                (layout.getChildAt(0) as? ImageView)?.setColorFilter(
+                    getColor(R.color.primary_blue),
+                    android.graphics.PorterDuff.Mode.SRC_IN
+                )
+            }
         }
     }
 

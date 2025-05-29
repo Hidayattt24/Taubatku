@@ -83,6 +83,11 @@
             android:name=".HadithDetailActivity"
             android:exported="false"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".MonthlyCalendarActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
