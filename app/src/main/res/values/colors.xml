@@ -32,4 +32,7 @@
 
     <color name="text_primary">#FFFFFF</color>
 
+    <color name="prayer_card_default">#40FFFFFF</color>
+    <color name="prayer_card_highlighted">#FFFFFF</color>
+
 </resources>

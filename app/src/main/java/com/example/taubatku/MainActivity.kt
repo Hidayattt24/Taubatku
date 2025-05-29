@@ -2,16 +2,20 @@ package com.example.taubatku
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import androidx.cardview.widget.CardView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.example.taubatku.api.PrayerTimeService
+import com.example.taubatku.data.PrayerTimesViewModel
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,6 +40,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var maghribTime: TextView
     private lateinit var ishaTime: TextView
     private val TAG = "MainActivity"
+    private val viewModel: PrayerTimesViewModel by viewModels()
+    private val handler = Handler(Looper.getMainLooper())
+    private val updateRunnable = object : Runnable {
+        override fun run() {
+            viewModel.fetchPrayerTimes()
+            handler.postDelayed(this, 1000) // Update every second
+        }
+    }
 
     private val prayerTimeService: PrayerTimeService by lazy {
         val logging = HttpLoggingInterceptor().apply {
@@ -84,6 +96,8 @@ class MainActivity : AppCompatActivity() {
             fetchPrayerTimes()
 
             setupBottomNavigation()
+            setupObservers()
+            startUpdates()
         } catch (e: Exception) {
             Log.e(TAG, "Error in onCreate", e)
             startActivity(Intent(this, LoginActivity::class.java))
@@ -105,87 +119,50 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchPrayerTimes() {
-        lifecycleScope.launch {
-            try {
-                val response = prayerTimeService.getPrayerTimes()
-                val timings = response.data.timings
+        viewModel.fetchPrayerTimes()
+    }
 
-                // Update UI with prayer times
-                updatePrayerTimes(timings)
-                updateCurrentPrayer(timings)
-            } catch (e: Exception) {
-                Log.e(TAG, "Error fetching prayer times", e)
+    private fun setupObservers() {
+        // Update current prayer name and time
+        viewModel.upcomingPrayer.observe(this) { prayer ->
+            currentPrayerName.text = prayer
+            
+            // Reset all cards to default background
+            listOf("Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha").forEach { prayerName ->
+                val cardId = resources.getIdentifier("${prayerName.lowercase()}Card", "id", packageName)
+                findViewById<CardView>(cardId)?.setCardBackgroundColor(
+                    getColor(R.color.prayer_card_default)
+                )
             }
+
+            // Highlight upcoming prayer card
+            val cardId = resources.getIdentifier("${prayer.lowercase()}Card", "id", packageName)
+            findViewById<CardView>(cardId)?.setCardBackgroundColor(
+                getColor(R.color.white)
+            )
+        }
+
+        viewModel.upcomingPrayerTime.observe(this) { time ->
+            currentPrayerTime.text = time
+        }
+
+        viewModel.timeUntilNextPrayer.observe(this) { timeUntil ->
+            nextPrayerText.text = "Waktu tersisa $timeUntil"
+        }
+
+        // Update all prayer times
+        viewModel.prayerTimes.observe(this) { timings ->
+            fajrTime.text = timings.Fajr
+            sunriseTime.text = timings.Sunrise
+            dhuhrTime.text = timings.Dhuhr
+            asrTime.text = timings.Asr
+            maghribTime.text = timings.Maghrib
+            ishaTime.text = timings.Isha
         }
     }
 
-    private fun updatePrayerTimes(timings: com.example.taubatku.data.Timings) {
-        fajrTime.text = convertTo12HourFormat(timings.fajr)
-        sunriseTime.text = convertTo12HourFormat(timings.sunrise)
-        dhuhrTime.text = convertTo12HourFormat(timings.dhuhr)
-        asrTime.text = convertTo12HourFormat(timings.asr)
-        maghribTime.text = convertTo12HourFormat(timings.maghrib)
-        ishaTime.text = convertTo12HourFormat(timings.isha)
-    }
-
-    private fun updateCurrentPrayer(timings: com.example.taubatku.data.Timings) {
-        val currentTime = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"))
-        val prayerTimes = mapOf(
-            "Fajr" to parseTime(timings.fajr),
-            "Sunrise" to parseTime(timings.sunrise),
-            "Dhuhr" to parseTime(timings.dhuhr),
-            "Asr" to parseTime(timings.asr),
-            "Maghrib" to parseTime(timings.maghrib),
-            "Isha" to parseTime(timings.isha)
-        ).toSortedMap()
-
-        var currentPrayer = "Isha" // Default to Isha
-        var nextPrayer = "Fajr"
-        var nextPrayerTime = prayerTimes["Fajr"] ?: return
-
-        for ((name, time) in prayerTimes) {
-            if (currentTime.before(time)) {
-                nextPrayer = name
-                nextPrayerTime = time
-                break
-            }
-            currentPrayer = name
-        }
-
-        // Update UI
-        currentPrayerName.text = currentPrayer
-        currentPrayerTime.text = when (currentPrayer) {
-            "Fajr" -> timings.fajr
-            "Sunrise" -> timings.sunrise
-            "Dhuhr" -> timings.dhuhr
-            "Asr" -> timings.asr
-            "Maghrib" -> timings.maghrib
-            else -> timings.isha
-        }
-
-        // Calculate time until next prayer
-        val timeDiff = nextPrayerTime.timeInMillis - currentTime.timeInMillis
-        val hours = timeDiff / (1000 * 60 * 60)
-        val minutes = (timeDiff % (1000 * 60 * 60)) / (1000 * 60)
-        val seconds = (timeDiff % (1000 * 60)) / 1000
-
-        nextPrayerText.text = "Next Prayer in ${hours}:${String.format("%02d", minutes)}:${String.format("%02d", seconds)}"
-    }
-
-    private fun parseTime(timeStr: String): Calendar {
-        val cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jakarta"))
-        val timeParts = timeStr.split(":")
-        cal.set(Calendar.HOUR_OF_DAY, timeParts[0].toInt())
-        cal.set(Calendar.MINUTE, timeParts[1].toInt())
-        cal.set(Calendar.SECOND, 0)
-        return cal
-    }
-
-    private fun convertTo12HourFormat(time24: String): String {
-        val inputFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-        val outputFormat = SimpleDateFormat("hh:mm", Locale.getDefault())
-        val date = inputFormat.parse(time24) ?: return time24
-        return outputFormat.format(date)
+    private fun startUpdates() {
+        handler.post(updateRunnable)
     }
 
     private fun setupBottomNavigation() {
@@ -237,5 +214,10 @@ class MainActivity : AppCompatActivity() {
         }
         // Refresh prayer times
         fetchPrayerTimes()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(updateRunnable)
     }
 }
